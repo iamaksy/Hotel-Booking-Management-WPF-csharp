@@ -1,0 +1,67 @@
+﻿<Window x:Class="HBM.RegisterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HBM"
+        xmlns:vm="clr-namespace:HBM.ViewModel"
+        mc:Ignorable="d"
+        Title="Register new User..." Height="539.264" Width="556.399" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="../Resources/FormBg.jpg" Opacity="0.5" Stretch="Fill"/>
+    </Window.Background>
+    <Window.Resources>
+        <vm:RegisterViewModel x:Key="RegisterViewModel"/>
+
+        <Style BasedOn="{StaticResource tbStyle}" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)/ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{StaticResource RegisterViewModel}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Text="Username :"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5" Text="Contact No 1:"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5" Text="Contact No 2:"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5" Text="Email :"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="5" Text="Location :"/>
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="5" Text="Address :"/>
+        <TextBlock Grid.Column="0" Grid.Row="6" Margin="5" Text="PinCode :"/>
+
+        <TextBox Name="Username" Text="{Binding Register.Username,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="0" Margin="5" Width="200"/>
+        <TextBox Name="Cont1" Text="{Binding Register.Contact1,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="1" Margin="5" Width="200"/>
+        <TextBox Name="Cont2" Text="{Binding Register.Contact2,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="2" Margin="5" Width="200"/>
+        <TextBox Name="Email" Text="{Binding Register.Email,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="3" Margin="5" Width="200"/>
+        <TextBox Name="Loc" Text="{Binding Register.Location,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="4" Margin="5" Width="200"/>
+        <RichTextBox Name="Add" Grid.Column="1" Grid.Row="5" Margin="5" Width="200" Height="100"/>
+        <TextBox Name="Pincode" Text="{Binding Register.PinCode,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="6" Margin="5" Width="200"/>
+        <TextBlock Text="{Binding Message, Mode=TwoWay}" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="5" TextWrapping="Wrap"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="btnRegister" Command="{Binding SaveCommand}" Margin="5" Padding="5" Content="Register"/>
+            <Button Name="btnLogin" Click="btnLogin_Click" Margin="5" Padding="5" Content="Login"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

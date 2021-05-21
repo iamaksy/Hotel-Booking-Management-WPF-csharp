@@ -1,0 +1,80 @@
+﻿<Window x:Class="HBM.View.BookingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HBM.View"
+        xmlns:vm="clr-namespace:HBM.ViewModel"
+        mc:Ignorable="d"
+        Title="BookingView" Height="550" Width="800" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Window.Background>
+        <ImageBrush ImageSource="../Resources/FormBg.jpg" Opacity="0.5" Stretch="Fill"/>
+    </Window.Background>
+    <!--<Window.DataContext>
+        <vm:BookingViewModel/>
+    </Window.DataContext>-->
+
+    <Grid HorizontalAlignment="Center">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="{Binding Path=Booking_.Title}" Margin="5" Padding="5"/>
+            <TextBlock Text="{Binding Path=Booking_.Desc}" Margin="5" Padding="5" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">
+            <TextBlock Text="Check-in :" Margin="5" Padding="5"/>
+            <DatePicker SelectedDate="{Binding Path=Booking_.CheckIN}" SelectedDateChanged="DP_in_SelectedDateChanged" SelectedDateFormat="Long" Name="DP_in" Text="" Margin="5" Padding="5" CalendarStyle="{StaticResource calender}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Check-out :" Margin="5" Padding="5"/>
+            <DatePicker SelectedDate="{Binding Path=Booking_.ChecckOut}" SelectedDateChanged="DP_out_SelectedDateChanged" SelectedDateFormat="Long" Name="DP_out" Text="" Margin="5" Padding="5" CalendarStyle="{StaticResource calender}"/>
+        </StackPanel>
+
+        <Button Command="{Binding Path=FairCommand}" Content="Check Price" Margin="5" Padding="5" Grid.Column="2" Grid.Row="1"/>
+        <TextBlock Text="{Binding Path=Booking_.TotalDay, Mode=TwoWay}" Name="lbl_booking" Margin="5" Padding="5" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Grid.Row="2"/>
+
+        <Border BorderBrush="White" BorderThickness="1" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Room Charges" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="GST (8%)" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Other Tax" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Total" Padding="5" Margin="5"/>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Booking_.RoomPrice, StringFormat={} {0}/- Per Night}" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Booking_.GST, StringFormat={} {0}/-}" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Booking_.TAX, StringFormat={} {0}/-}" Padding="5" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Booking_.Price, StringFormat={} {0}/-}" Padding="5" Margin="5"/>
+            </Grid>
+        </Border>
+
+        <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Command="{Binding Path=BookCommand}" Content="Book Now" Margin="5" Padding="5"/>
+
+    </Grid>
+</Window>
